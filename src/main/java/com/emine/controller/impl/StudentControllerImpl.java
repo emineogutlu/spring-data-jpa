@@ -6,8 +6,10 @@ import com.emine.dto.DtoStudentIU;
 import com.emine.entities.Student;
 import com.emine.repository.StudentRepository;
 import com.emine.services.IStudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class StudentControllerImpl implements IStudentController {
     //Uses DTO
     @PostMapping(path = "/save")
     @Override
-    public DtoStudent saveStudent (@RequestBody DtoStudentIU dtoStudentIU){
+    public DtoStudent saveStudent (@RequestBody @Valid DtoStudentIU dtoStudentIU){
      return studentService.saveStudent(dtoStudentIU);
  }
   @GetMapping(path="/list")
