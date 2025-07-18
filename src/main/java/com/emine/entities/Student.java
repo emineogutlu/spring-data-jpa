@@ -24,6 +24,6 @@ public class Student {
    private String lastName;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(name="birth_of_name",nullable = true)
+    @Column(name="birth_of_date",nullable = true)
    private Date birthOfDate;
 }
