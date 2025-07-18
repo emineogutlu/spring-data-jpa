@@ -42,4 +42,9 @@ public class StudentControllerImpl implements IStudentController {
 
 
     }
+@PutMapping(path ="/update/{id}" )
+    @Override
+    public Student updateStudent(@PathVariable(name="id") Integer id,@RequestBody Student updateStudent) {
+        return studentService.updateStudent(id, updateStudent);
+    }
 }

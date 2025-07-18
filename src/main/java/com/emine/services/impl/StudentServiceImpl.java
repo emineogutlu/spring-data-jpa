@@ -44,5 +44,18 @@ if(dbStudent!=null){
 }
     }
 
+    @Override
+    public Student updateStudent(Integer id, Student updatedStudent) {
+      Student dbstudent=  getStudentById(id);
+      if(dbstudent!=null){
+          dbstudent.setFirstName(updatedStudent.getFirstName());
+          dbstudent.setLastName(updatedStudent.getLastName());
+          dbstudent.setBirthOfDate(updatedStudent.getBirthOfDate());
+
+        return   studentRepository.save(dbstudent);
+      }
+        return null;
+    }
+
 
 }
