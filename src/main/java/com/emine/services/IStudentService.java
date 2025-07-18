@@ -8,5 +8,6 @@ public interface IStudentService {
     Student saveStudent (Student student);
     public List<Student> getAllStudents();
 
-    public Student getStudentById(int id);
+    public Student getStudentById(Integer id);
+    public void deleteStudent(Integer id);
 }

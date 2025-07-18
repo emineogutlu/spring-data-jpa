@@ -28,11 +28,21 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public Student getStudentById(int id) {
+    public Student getStudentById(Integer id) {
         Optional<Student> optional=  studentRepository.findById(id);
         if(optional.isPresent()){
             return optional.get();
         }
         return null;
     }
+
+    @Override
+    public void deleteStudent(Integer id) {
+Student dbStudent=getStudentById(id);
+if(dbStudent!=null){
+    studentRepository.delete(dbStudent);
+}
+    }
+
+
 }
