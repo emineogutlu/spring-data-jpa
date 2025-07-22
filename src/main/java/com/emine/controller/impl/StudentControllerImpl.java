@@ -19,8 +19,7 @@ import java.util.List;
 public class StudentControllerImpl implements IStudentController {
     @Autowired
     private IStudentService studentService;
-    @Autowired
-    private StudentRepository studentRepository;
+
 
     //Uses DTO
     @PostMapping(path = "/save")

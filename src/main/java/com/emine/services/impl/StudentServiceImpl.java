@@ -1,8 +1,10 @@
 package com.emine.services.impl;
 
 import com.emine.controller.IStudentController;
+import com.emine.dto.DtoCourse;
 import com.emine.dto.DtoStudent;
 import com.emine.dto.DtoStudentIU;
+import com.emine.entities.Course;
 import com.emine.entities.Student;
 import com.emine.repository.StudentRepository;
 import com.emine.services.IStudentService;
@@ -31,6 +33,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public List<DtoStudent> getAllStudents() {
+
         List<DtoStudent>dtoList = new ArrayList<>();
        List<Student>studentList= studentRepository.findAllStudents();
        for(Student student:studentList){
@@ -43,13 +46,31 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public DtoStudent getStudentById(Integer id) {
-        DtoStudent dto=new DtoStudent();
-        Optional<Student> optional=  studentRepository.findStudentById(id);
-        if(optional.isPresent()){
-            Student dbStudent =optional.get();
-            BeanUtils.copyProperties(dbStudent,dto);
+      //  DtoStudent dto=new DtoStudent();
+        //Optional<Student> optional=  studentRepository.findStudentById(id);
+       // if(optional.isPresent()){
+          //  Student dbStudent =optional.get();
+         //   BeanUtils.copyProperties(dbStudent,dto);
+       // }
+      //  return dto;
+
+        DtoStudent dtoStudent=new DtoStudent();
+        Optional<Student> optional=studentRepository.findById(id);
+        if(optional.isEmpty()){
+        return null;
         }
-        return dto;
+        Student dbStudent=optional.get();
+        BeanUtils.copyProperties(dbStudent,dtoStudent);
+
+        if(dbStudent.getCourses()!=null&& !dbStudent.getCourses().isEmpty()){
+            for(Course course:dbStudent.getCourses()){
+                DtoCourse dtoCourse=new DtoCourse();
+                BeanUtils.copyProperties(course,dtoCourse);
+
+                dtoStudent.getCourses().add(dtoCourse);
+            }
+        }
+        return dtoStudent;
     }
 
     @Override
@@ -67,15 +88,18 @@ public class StudentServiceImpl implements IStudentService {
      Optional<Student> optional=studentRepository.findById(id);
      if(optional.isPresent()){
          Student dbStudent=optional.get();
+
          dbStudent.setFirstName(dtoStudentIU.getFirstName());
          dbStudent.setLastName(dtoStudentIU.getLastName());
          dbStudent.setBirthOfDate(dtoStudentIU.getBirthOfDate());
-      Student updatedStudent=studentRepository.save(dbStudent);
-      BeanUtils.copyProperties(updatedStudent,dto);
 
+      Student updatedStudent=studentRepository.save(dbStudent);
+
+      BeanUtils.copyProperties(updatedStudent,dto);
+      return dto;
 
      }
-        return dto;
+        return null;
     }
     }
 

@@ -4,19 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
+@Service
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoStudent {
+public class DtoCourse {
 
     private Long id;
-    private String firstName;
-    private String lastName;
-    private List<DtoCourse> courses=new ArrayList<>();
+    public String name;
+
+
+
 
 }
