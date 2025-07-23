@@ -23,6 +23,7 @@ return null;
     }
     @GetMapping(value= "/getServers")
     public List<Server> getServers(){
+    System.out.println("Key Value : "+ globalProperties.getKey());
    return globalProperties.getServers();
     }
 }
