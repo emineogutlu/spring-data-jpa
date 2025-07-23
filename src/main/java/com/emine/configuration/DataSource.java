@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DataSource {
+public class DataSource{
     private String url;
     private String username;
     private String password;
